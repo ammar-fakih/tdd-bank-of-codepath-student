@@ -50,7 +50,7 @@ export default function App() {
               }
             />
             <Route
-              path="/transaction/:transactionId"
+              path="/transactions/:transactionId"
               element={<TransactionDetail />}
             />
           </Routes>

@@ -7,6 +7,8 @@ import AddTransaction from '../AddTransaction/AddTransaction';
 import BankActivity from '../BankActivity/BankActivity';
 import './Home.css';
 
+let test = [];
+
 export default function Home({
   transactions,
   setTransactions,
@@ -30,7 +32,7 @@ export default function Home({
         const response = await axios.get(
           `http://localhost:${API_PORT}/bank/transactions`
         );
-        setTransactions(response.data.transactions);
+        setTransactions([...transactions, ...response.data.transactions]);
       } catch (e) {
         setError(e);
         console.log('transaction error: ', e);
@@ -48,12 +50,37 @@ export default function Home({
       }
     };
 
-    fetchTransactions();
+    await fetchTransactions();
     await fetchTransfers();
     setIsLoading(false);
   }, []);
 
-  const handleOnSubmitNewTransaction = async (e) => {};
+  useEffect(() => {
+    console.log('transactins', transactions);
+  }, [transactions]);
+
+  const handleOnCreateTransaction = async () => {
+    while (isLoading) {}
+    console.log(isLoading);
+    console.log(transactions);
+    setIsCreating(true);
+    console.log('handle create called');
+    try {
+      const response = await axios.post(
+        `http://localhost:${API_PORT}/bank/transactions`,
+        { ...newTransactionForm }
+      );
+      console.log(response.data);
+      setTransactions([response.data.transaction, ...test]);
+    } catch (e) {
+      setError(e);
+    }
+
+    // setNewTransactionForm({ category: '', description: '', amount: 0 });
+    setIsCreating(false);
+  };
+
+  // console.log('transactions: ', transactions);
 
   let filteredTransactions = transactions;
 
@@ -72,13 +99,16 @@ export default function Home({
         setIsCreating={setIsCreating}
         form={newTransactionForm}
         setForm={setNewTransactionForm}
-        handleOnSubmit={handleOnSubmitNewTransaction}
+        handleOnSubmit={handleOnCreateTransaction}
       />
       {error && <h2>{error}</h2>}
       {isLoading ? (
         <h1>Loading...</h1>
       ) : (
-        <BankActivity transactions={filteredTransactions} />
+        <BankActivity
+          transactions={filteredTransactions}
+          transfers={transfers}
+        />
       )}
     </div>
   );
