@@ -8,7 +8,7 @@ import TransactionDetail from '../TransactionDetail/TransactionDetail';
 import './App.css';
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [transactions, setTransactions] = useState([]);
   const [transfers, setTransfers] = useState([]);
   const [error, setError] = useState(null);

@@ -24,7 +24,7 @@ export default function Home({
 }) {
   useEffect(async () => {
     setIsLoading(true);
-    
+
     const fetchTransactions = async () => {
       try {
         const response = await axios.get(
@@ -61,7 +61,7 @@ export default function Home({
     filteredTransactions = transactions.filter((trans) => {
       return trans.description
         .toLowerCase()
-        .contains(filterInputValue.toLowerCase());
+        .includes(filterInputValue.toLowerCase());
     });
   }
 

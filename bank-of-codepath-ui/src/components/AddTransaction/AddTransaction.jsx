@@ -3,7 +3,7 @@ import './AddTransaction.css';
 
 export default function AddTransaction(props) {
   const handleOnFormFieldChange = (change) => {
-    console.log(change);
+    console.log("form Changed", change);
     if (change.target.name === 'category') {
       props.setForm({
         ...props.form,
@@ -42,6 +42,7 @@ export function AddTransactionForm({
   form,
   ...props
 }) {
+  // console.log("description", form.description)
   return (
     <div className="form">
       <div className="fields">
@@ -49,7 +50,7 @@ export function AddTransactionForm({
           <label>Description</label>
           <input
             name="description"
-            value={form.description}
+            // value={form.description}
             onChange={handleOnFormFieldChange}
           />
         </div>
@@ -57,7 +58,7 @@ export function AddTransactionForm({
           <label>Category</label>
           <input
             name="category"
-            value={form.category}
+            // value={form.category}
             onChange={handleOnFormFieldChange}
           />
         </div>
@@ -65,7 +66,7 @@ export function AddTransactionForm({
           <label>Amount (cents)</label>
           <input
             name="amount"
-            value={form.amount}
+            // value={form.amount}
             type="number"
             onChange={handleOnFormFieldChange}
           />
