@@ -39,21 +39,19 @@ export default function BankActivity(props) {
 
 export function TransactionRow({ transaction }) {
   return (
-    <div>
-      {transaction.id && (
-        <Link to={`/transactions/${transaction.id ? transaction.id : 100}`}>
-          <div className="table-row transaction-row">
-            <span className="col x4">
-              <Arrow amount={transaction.amount} />
-              {transaction.description}
-            </span>
-            <span className="col x2">{transaction.category}</span>
-            <span className="col x2">{formatAmount(transaction.amount)}</span>
-            <span className="col x15">{formatDate(transaction.postedAt)}</span>
-          </div>
-        </Link>
-      )}
-    </div>
+    <Link
+      href={`/transactions/${transaction.id ? transaction.id : 100}`}
+      to={`/transactions/${transaction.id ? transaction.id : 100}`}>
+      <div className="table-row transaction-row">
+        <span className="col x4">
+          <Arrow amount={transaction.amount} />
+          {transaction.description}
+        </span>
+        <span className="col x2">{transaction.category}</span>
+        <span className="col x2">{formatAmount(transaction.amount)}</span>
+        <span className="col x15">{formatDate(transaction.postedAt)}</span>
+      </div>
+    </Link>
   );
 }
 

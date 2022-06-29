@@ -7,8 +7,6 @@ import AddTransaction from '../AddTransaction/AddTransaction';
 import BankActivity from '../BankActivity/BankActivity';
 import './Home.css';
 
-let test = [];
-
 export default function Home({
   transactions,
   setTransactions,
@@ -32,7 +30,7 @@ export default function Home({
         const response = await axios.get(
           `http://localhost:${API_PORT}/bank/transactions`
         );
-        setTransactions([...transactions, ...response.data.transactions]);
+        setTransactions(response.data.transactions);
       } catch (e) {
         setError(e);
         console.log('transaction error: ', e);
@@ -55,23 +53,23 @@ export default function Home({
     setIsLoading(false);
   }, []);
 
-  useEffect(() => {
-    console.log('transactins', transactions);
-  }, [transactions]);
+  // useEffect(() => {
+  //   console.log('transactins', transactions);
+  // }, [transactions]);
 
   const handleOnCreateTransaction = async () => {
     while (isLoading) {}
-    console.log(isLoading);
-    console.log(transactions);
+    console.log('trans form', newTransactionForm);
     setIsCreating(true);
     console.log('handle create called');
     try {
       const response = await axios.post(
         `http://localhost:${API_PORT}/bank/transactions`,
-        { ...newTransactionForm }
+        { transaction: { ...newTransactionForm } }
       );
-      console.log(response.data);
-      setTransactions([response.data.transaction, ...test]);
+      console.log(response);
+
+      setTransactions([...transactions, response.data.transaction]);
     } catch (e) {
       setError(e);
     }

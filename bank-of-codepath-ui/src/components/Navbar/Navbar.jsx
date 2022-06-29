@@ -13,7 +13,7 @@ export default function Navbar({ filterInputValue, setFilterInputValue }) {
   return (
     <nav className="navbar">
       <Logo path={'/'} />
-      <a className="logo">Logo</a>
+      {/* <a className="logo">Logo</a> */}
 
       <div className="search">
         <FilterInput
@@ -41,10 +41,10 @@ export default function Navbar({ filterInputValue, setFilterInputValue }) {
 
 export function Logo({ path }) {
   return (
-    <a className="logo">
-      <Link to={path}>
+    <Link to={path}>
+      <a className="logo">
         <img src={codepath} alt="logo" />
-      </Link>
-    </a>
+      </a>
+    </Link>
   );
 }

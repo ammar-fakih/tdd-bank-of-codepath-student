@@ -3,7 +3,6 @@ import './AddTransaction.css';
 
 export default function AddTransaction(props) {
   const handleOnFormFieldChange = (change) => {
-    console.log('form Changed', change);
     if (change.target.name === 'category') {
       props.setForm({
         ...props.form,
